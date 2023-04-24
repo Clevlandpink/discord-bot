@@ -61,11 +61,11 @@ class Utility(commands.Cog):
         else:
             await ctx.send("Tails")
 
-    @commands.command(name="prune", aliases=["purge", "delete"])
+    @commands.hybrid_command(name="prune", aliases=["purge", "delete"])
     @commands.guild_only()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    #@commands.has_permissions(manage_messages=True)
-    @commands.is_owner()
+    @commands.has_permissions(manage_messages=True)
+    #@commands.is_owner()
     async def prune(self, ctx, number: int):
         """Bulk deletes given number of __recent__ messages.
 
@@ -91,7 +91,8 @@ class Utility(commands.Cog):
     
     @commands.hybrid_command(name="move", hidden=False)
     @commands.cooldown(1, 10, commands.BucketType.user)
-    @commands.has_permissions(move_members=True)
+    @commands.has_any_role(156929098583638017, 845512204403867678) # Temporary workaround
+    #@commands.has_permissions(move_members=True) # Seems to be broken right now.
     async def move(self, ctx, *, channel: discord.VoiceChannel):
         """Moves all members of your current channel to the given channel.
 
@@ -116,7 +117,6 @@ class Utility(commands.Cog):
         for m in r:
             await m.move_to(channel)
         await ctx.send("Success!", delete_after=1)
-        #await ctx.message.delete()
-
+    
 async def setup(bot):
     await bot.add_cog(Utility(bot))

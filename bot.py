@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 command_prefixs = ["!", "."]
 
 extensions = [
-    "cogs.owner"
+    "cogs.owner",
     "cogs.help",
     "cogs.utility",
     "cogs.runescape",
@@ -62,7 +62,7 @@ class PondBot(commands.Bot):
             await ctx.message.delete()
             await ctx.send("This command can only be used in DM.", delete_after=5)
         elif isinstance(error, commands.CheckFailure):
-            await ctx.send("You do not have permission to use this command.", delete_after=5)
+            await ctx.send(error, delete_after=5)
         elif isinstance(error, commands.CommandNotFound):
             return
         elif isinstance(error, commands.MaxConcurrencyReached):
