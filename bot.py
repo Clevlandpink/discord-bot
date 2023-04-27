@@ -112,7 +112,7 @@ bot = PondBot()
 
 async def main():
     async with bot:
-        await bot.start(config.DEV_TOKEN, reconnect=True)
+        await bot.start(config.TOKEN, reconnect=True)
 
 
 asyncio.run(main())
